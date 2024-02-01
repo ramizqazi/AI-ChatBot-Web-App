@@ -1,9 +1,11 @@
 import React from 'react';
-import { Box, Button, useDisclosure } from '@chakra-ui/react';
-import { FiMenu } from "react-icons/fi";
+import { FiMenu } from 'react-icons/fi';
+import { Link as NavLink } from 'react-router-dom';
+import { Box, Button, Link, Img, Text, useDisclosure } from '@chakra-ui/react';
 
 import SideNavList from './SideNavList';
 import SideNavDrawer from './SideNavDrawer';
+import LogoImg from '../../assets/images/logo.png';
 
 /* =============================================================================
 <SideNav />
@@ -11,23 +13,11 @@ import SideNavDrawer from './SideNavDrawer';
 const SideNav = ({ isLargerThan766 }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
-  const _handleToggleDrawer = () => {
-    if (isOpen) {
-      onClose()
-    } else {
-      onOpen()
-    }
-  };
-
   if (!isLargerThan766) {
     return (
-      <Box bg='white' p={5}>
-        <Button
-          display="flex"
-          variant="unstyled"
-          onClick={onOpen}
-        >
-          <FiMenu size={22}/>
+      <Box p={5}>
+        <Button display="flex" variant="unstyled" onClick={onOpen}>
+          <FiMenu size={22} color="white" />
           <SideNavDrawer onClose={onClose} isOpen={isOpen} />
         </Button>
       </Box>
@@ -40,22 +30,38 @@ const SideNav = ({ isLargerThan766 }) => {
       left={0}
       bottom={0}
       zIndex={10}
-      bgColor='white'
       overflowY="hidden"
-      borderRadius='6px'
-      transition='width .5s'
-      border="1px solid #E4E7EC"
-      w={isOpen ? '250px' : '75px'}
+      onMouseEnter={onOpen}
+      onMouseLeave={onClose}
+      borderWidth={0}
+      transition="width .5s"
+      w={isOpen ? '250px' : '100px'}
       position={isLargerThan766 ? 'relative' : 'fixed'}
     >
-      <Button
-        m={"1rem"}
+      <Link
+        px="20px"
+        py="18px"
+        mt="1.5rem"
+        as={NavLink}
+        ml={'0.5rem'}
         display="flex"
-        variant="unstyled"
-        onClick={_handleToggleDrawer}
+        alignItems="center"
+        to='/chat'
       >
-        <FiMenu size={22}/>
-      </Button>
+        <Img src={LogoImg} w="45px" h="45px" />
+        {isOpen && (
+          <Text
+            ml="55px"
+            fontSize="28px"
+            fontWeight="semibold"
+            position="absolute"
+            color={'#fff'}
+            whiteSpace="nowrap"
+          >
+            Chat Bot
+          </Text>
+        )}
+      </Link>
       <SideNavList isOpen={isOpen} />
     </Box>
   );

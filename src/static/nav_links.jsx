@@ -1,19 +1,18 @@
 import React from 'react';
-
-import { FaRegFaceGrinWide } from 'react-icons/fa6';
-import { FaRegCheckCircle } from 'react-icons/fa';
+import { CiChat1 } from 'react-icons/ci';
+import { CiSettings } from 'react-icons/ci';
 
 export default [
   {
-    to: '/users/add-user',
-    title: 'Add Face',
-    InActiveIcon: <FaRegFaceGrinWide />,
-    ActiveIcon: <FaRegFaceGrinWide color='white'/>,
+    to: '/chat',
+    title: 'Chat',
+    InActiveIcon: <CiChat1 size={26} color="white" />,
+    ActiveIcon: <CiChat1 size={26} color="white" />,
   },
   {
-    to: '/users/face-verification',
-    title: 'Face Verification',
-    InActiveIcon: <FaRegCheckCircle />,
-    ActiveIcon: <FaRegCheckCircle color='white' />,
+    to: '/settings',
+    title: 'Settings',
+    InActiveIcon: <CiSettings size={26} color="white" />,
+    ActiveIcon: <CiSettings size={26} color="white" />,
   },
 ];

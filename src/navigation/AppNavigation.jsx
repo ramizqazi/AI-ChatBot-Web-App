@@ -1,7 +1,8 @@
 import React from 'react';
-import { Routes, Route, BrowserRouter as Router } from 'react-router-dom';
+import { Routes, Route, BrowserRouter as Router, Navigate } from 'react-router-dom';
 
-import Layout from '../components/Layout6';
+import Chat from '../containers/Chat';
+import Layout from '../components/Layout';
 
 /* =============================================================================
 <AppNavigation />
@@ -11,8 +12,9 @@ const AppNavigation = () => {
     <Router>
       <Layout>
         <Routes>
-          {/* <Route path="add-user" element={<AddUser />} />
-          <Route path="face-verification" element={<FaceVerification />} /> */}
+          <Route path="/" element={<Navigate to="/chat" />} />
+          <Route path="chat" element={<Chat />} />
+          {/* <Route path="face-verification" element={<FaceVerification />} /> */}
         </Routes>
       </Layout>
     </Router>
