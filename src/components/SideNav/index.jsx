@@ -15,7 +15,7 @@ const SideNav = ({ isLargerThan766 }) => {
 
   if (!isLargerThan766) {
     return (
-      <Box p={5}>
+      <Box px={5} pt={5}>
         <Button display="flex" variant="unstyled" onClick={onOpen}>
           <FiMenu size={22} color="white" />
           <SideNavDrawer onClose={onClose} isOpen={isOpen} />

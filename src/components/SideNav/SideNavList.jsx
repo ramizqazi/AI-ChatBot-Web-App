@@ -7,7 +7,7 @@ import NAV_LINKS from '../../static/nav_links';
 
 const SideNavList = ({ isOpen }) => {
   const location = useLocation();
-  
+
   return (
     <List
       ml={'0.5rem'}
@@ -53,6 +53,11 @@ const SideNavList = ({ isOpen }) => {
   );
 };
 
-const isActive = (link, location) => location.pathname.startsWith(link);
+const isActive = (link, location) => {
+  if (location.pathname === '/' && link === '/chat') {
+    return true;
+  }
+  return location.pathname.startsWith(link);
+};
 
 export default SideNavList;

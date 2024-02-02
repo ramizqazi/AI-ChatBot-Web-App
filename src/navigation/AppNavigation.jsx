@@ -1,5 +1,9 @@
 import React from 'react';
-import { Routes, Route, BrowserRouter as Router, Navigate } from 'react-router-dom';
+import {
+  Routes,
+  Route,
+  BrowserRouter as Router,
+} from 'react-router-dom';
 
 import Chat from '../containers/Chat';
 import Layout from '../components/Layout';
@@ -13,7 +17,7 @@ const AppNavigation = () => {
     <Router>
       <Layout>
         <Routes>
-          <Route path="/" element={<Navigate to="/chat" />} />
+          <Route path="/" element={<Chat />} />
           <Route path="chat" element={<Chat />} />
           <Route path="settings" element={<Settings />} />
         </Routes>
