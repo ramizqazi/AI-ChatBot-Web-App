@@ -1,41 +1,22 @@
-import React from 'react';
-import { Box, HStack, IconButton, Text } from '@chakra-ui/react';
-import { FaMicrophone } from 'react-icons/fa';
-import '@chatscope/chat-ui-kit-styles/dist/default/styles.min.css';
-import {
-  MainContainer,
-  ChatContainer,
-  MessageList,
-  Message,
-  MessageInput,
-} from '@chatscope/chat-ui-kit-react';
+import React, { useState } from 'react';
+
+import ChatView from './view';
 
 /* =============================================================================
 <Chat />
 ============================================================================= */
-const Chat = () => {
+const Chat = ({ messages, sendMessage }) => {
+  const [text, setText] = useState('');
+
+  const _handleMessageSend = () => {};
+
   return (
-    <Box flex={1} pos="relative">
-      <ChatContainer>
-        <MessageList>
-          <Message
-            model={{
-              message: 'Hello my friend',
-              sentTime: 'just now',
-              sender: 'Joe',
-            }}
-          />
-        </MessageList>
-        <MessageInput placeholder="Type message here" attachButton={false} />
-      </ChatContainer>
-      <IconButton
-        icon={<FaMicrophone />}
-        pos="absolute"
-        bottom="5px"
-        left="-35px"
-        bg="transparent"
-      />
-    </Box>
+    <ChatView
+      text={text}
+      messages={messages}
+      onTextChange={setText}
+      onSend={_handleMessageSend}
+    />
   );
 };
 
