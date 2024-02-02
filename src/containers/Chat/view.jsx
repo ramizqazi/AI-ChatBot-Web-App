@@ -1,6 +1,5 @@
 import React from 'react';
-import { FaMicrophone } from 'react-icons/fa';
-import { Box, IconButton, Img, Text, VStack } from '@chakra-ui/react';
+import { Box, Img, Text, VStack } from '@chakra-ui/react';
 import '@chatscope/chat-ui-kit-styles/dist/default/styles.min.css';
 import {
   Message,
@@ -11,11 +10,12 @@ import {
 import { useLocation, useNavigate } from 'react-router-dom';
 
 import logoImg from '../../assets/images/logo.png';
+import SpeechToTextButton from '../../components/SpeechToTextButton';
 
 /* =============================================================================
 <ChatView />
 ============================================================================= */
-const ChatView = ({ onSend }) => {
+const ChatView = ({ onSend, text, onTextChange }) => {
   const navigate = useNavigate();
   const { pathname } = useLocation();
   const showWelcome = pathname === '/';
@@ -62,16 +62,12 @@ const ChatView = ({ onSend }) => {
         <MessageInput
           placeholder="Type message here"
           attachButton={false}
+          value={text}
+          onChange={e => onTextChange(e.target.value)}
           onSend={_handleSend}
         />
       </ChatContainer>
-      <IconButton
-        left="-35px"
-        bottom="5px"
-        pos="absolute"
-        bg="transparent"
-        icon={<FaMicrophone />}
-      />
+      <SpeechToTextButton onTranscriptChange={onTextChange} />
     </Box>
   );
 };
