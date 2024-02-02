@@ -5,9 +5,10 @@ import {
   BrowserRouter as Router,
 } from 'react-router-dom';
 
-import Chat from '../containers/Chat';
+// import Chat from '../containers/Chat';
 import Layout from '../components/Layout';
 import Settings from '../containers/Settings';
+import SpeechToText from '../containers/SpeechToText';
 
 /* =============================================================================
 <AppNavigation />
@@ -17,8 +18,8 @@ const AppNavigation = () => {
     <Router>
       <Layout>
         <Routes>
-          <Route path="/" element={<Chat />} />
-          <Route path="chat" element={<Chat />} />
+          <Route path="/" element={<SpeechToText />} />
+          <Route path="chat" element={<SpeechToText />} />
           <Route path="settings" element={<Settings />} />
         </Routes>
       </Layout>
