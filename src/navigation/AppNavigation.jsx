@@ -3,6 +3,7 @@ import { Routes, Route, BrowserRouter as Router, Navigate } from 'react-router-d
 
 import Chat from '../containers/Chat';
 import Layout from '../components/Layout';
+import Settings from '../containers/Settings';
 
 /* =============================================================================
 <AppNavigation />
@@ -14,7 +15,7 @@ const AppNavigation = () => {
         <Routes>
           <Route path="/" element={<Navigate to="/chat" />} />
           <Route path="chat" element={<Chat />} />
-          {/* <Route path="face-verification" element={<FaceVerification />} /> */}
+          <Route path="settings" element={<Settings />} />
         </Routes>
       </Layout>
     </Router>
