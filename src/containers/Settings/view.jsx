@@ -16,10 +16,10 @@ const SettingsView = ({
       <Box w="full">
         <HStack justify="space-between">
           <Box flex={3}>
-            <Text fontSize={22} fontWeight="semibold">
+            <Text fontSize={['lg', 'lg', 'xl']} fontWeight="semibold">
               Temperature:
             </Text>
-            <Text fontSize="sm">
+            <Text fontSize={['xs', 'xs', 'sm']}>
               Temperature is a parameter of OpenAI ChatGPT that governs the
               creativity of the responses.
             </Text>
@@ -34,10 +34,10 @@ const SettingsView = ({
         </HStack>
         <HStack justify="space-between" mt={5}>
           <Box flex={3}>
-            <Text fontSize={22} fontWeight="semibold">
+            <Text fontSize={['lg', 'lg', 'xl']} fontWeight="semibold">
               Default Query:
             </Text>
-            <Text fontSize="sm">
+            <Text fontSize={['xs', 'xs', 'sm']}>
               Any default text you want to send with every message you send.
             </Text>
           </Box>

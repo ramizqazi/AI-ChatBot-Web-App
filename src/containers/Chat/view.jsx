@@ -34,7 +34,7 @@ const ChatView = ({ onSend }) => {
           pos="absolute"
           left={0}
           right={0}
-          mt='10%'
+          mt="10%"
           rowGap="10px"
           textAlign="center"
         >
