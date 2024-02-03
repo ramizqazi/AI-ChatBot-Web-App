@@ -1,1 +1,1 @@
-export const API_URL = 'http://162.244.80.239:8001/'
+export const API_URL = 'https://api.openai.com/v1/chat'
