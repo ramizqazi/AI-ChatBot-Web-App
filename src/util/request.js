@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { API_URL } from '../config/secrets';
+import { API_URL, API_KEY } from '../config/secrets';
 
 /**
  * Request Wrapper with default success/error actions
@@ -10,7 +10,7 @@ const request = async (options) => {
   const client = axios.create({
     baseURL: API_URL,
     headers: {
-      // Authorization: `Bearer ${token}`,
+      Authorization: `Bearer ${API_KEY}`,
     },
   });
   const onSuccess = (response) => response.data;

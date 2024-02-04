@@ -22,10 +22,11 @@ const Layout = ({ children }) => {
         flex={1}
         px={10}
         py={6}
-        borderRadius='20px'
-        m='20px'
-        overflow='hidden'
-        bg='#fff'
+        borderRadius="20px"
+        m="20px"
+        overflow="scroll"
+        pos='hidden'
+        bg="#fff"
         flexFlow="column nowrap"
       >
         {children}

@@ -1,16 +1,20 @@
 import thunk from 'redux-thunk';
 import storage from 'redux-persist/lib/storage'; // defaults to localStorage for web
-import { configureStore } from '@reduxjs/toolkit';
+import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import { persistReducer, persistStore } from 'redux-persist';
 
-import chatReducer from './chatSlice';
+import messagesSlice from './messagesSlice';
+
+const rootReducer = combineReducers({
+  messages: messagesSlice,
+});
 
 const persistConfig = {
   key: 'root',
   storage,
 };
 
-const persistedReducer = persistReducer(persistConfig, chatReducer);
+const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 export default () => {
   const store = configureStore({
