@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { connect } from 'react-redux';
 import { Box, Img, Text, VStack } from '@chakra-ui/react';
 import '@chatscope/chat-ui-kit-styles/dist/default/styles.min.css';
 import {
@@ -11,8 +12,8 @@ import {
 import { useLocation, useNavigate } from 'react-router-dom';
 
 import logoImg from '../../assets/images/logo.png';
-import SpeechToTextButton from '../../components/SpeechToTextButton';
-import { connect } from 'react-redux';
+import SpeechToText from '../../components/SpeechToText';
+import MessageAudioBubble from '../../components/MessageAudioBubble';
 import { selectIsLoading } from '../../redux/messagesSlice';
 
 /* =============================================================================
@@ -61,17 +62,23 @@ const ChatView = ({ messages, loading, onSend }) => {
             }
           >
             {messages?.length > 0 &&
-              messages?.map(message => (
-                <Message
-                  key={message?.id}
-                  model={{
-                    message: message?.content,
-                    sender: message?.role,
-                    direction:
-                      message?.role === 'user' ? 'outgoing' : 'incoming',
-                  }}
-                />
-              ))}
+              messages?.map(message => {
+                if (typeof message?.content === 'object') {
+                  return <MessageAudioBubble message={message?.content} />
+                }
+                return (
+                  <Message
+                    key={message?.id}
+                    style={message?.content.includes('Voice') ? { padding: '20px' } : null}
+                    model={{
+                      message: message?.content,
+                      sender: message?.role,
+                      direction:
+                        message?.role === 'user' ? 'outgoing' : 'incoming',
+                    }}
+                  />
+                )
+              })}
           </MessageList>
         )}
         <MessageInput
@@ -83,7 +90,7 @@ const ChatView = ({ messages, loading, onSend }) => {
           placeholder="Type message here"
         />
       </ChatContainer>
-      <SpeechToTextButton onTranscriptChange={setText} />
+      <SpeechToText onTranscriptChange={setText} />
     </Box>
   );
 };

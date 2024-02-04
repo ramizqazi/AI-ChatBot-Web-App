@@ -28,8 +28,6 @@ export const sendMessage = createAsyncThunk(
     const messages = selectMessages(getState());
     const { temperature, defaultQuery } = getState();
 
-    console.log('ACTION', messages);
-
     let query = {
       role: 'user',
       content: defaultQuery ? `${text} and ${defaultQuery}` : text,
@@ -52,7 +50,6 @@ export const sendMessage = createAsyncThunk(
         messages: [...messagesWithoutIds, query],
       },
     }).catch(e => console.log('Err', e));
-    console.log('Action :', response);
 
     const answer = response.choices && {
       id: generateRandomId(),
@@ -67,13 +64,12 @@ export const sendAudioMessage = createAsyncThunk(
   'sendAudioMessage',
   async (file, { getState, dispatch }) => {
     const { temperature, defaultQuery } = getState();
-
+    const query = { id: generateRandomId(), role: 'user', content: file };
     dispatch(
-      addUserQuery({ id: generateRandomId(), role: 'user', content: 'audio' })
+      addUserQuery(query)
     );
-
+    
     const form = new FormData();
-
     form.append('file', file);
     form.append('temperature', temperature);
     form.append('response_format', 'text');
@@ -95,7 +91,7 @@ export const sendAudioMessage = createAsyncThunk(
       ...response.choices[0]?.message,
     };
 
-    return answer;
+    return answer
   }
 );
 

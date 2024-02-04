@@ -24,8 +24,8 @@ const Layout = ({ children }) => {
         py={6}
         borderRadius="20px"
         m="20px"
-        overflow="scroll"
-        pos='hidden'
+        overflow="hidden"
+        pos='relative'
         bg="#fff"
         flexFlow="column nowrap"
       >

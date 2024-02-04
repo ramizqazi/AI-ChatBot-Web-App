@@ -30,7 +30,7 @@ const SideNav = ({ isLargerThan766 }) => {
       left={0}
       bottom={0}
       zIndex={10}
-      overflowY="hidden"
+      overflow="hidden"
       onMouseEnter={onOpen}
       onMouseLeave={onClose}
       borderWidth={0}
