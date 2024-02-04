@@ -26,7 +26,8 @@ export const sendMessage = createAsyncThunk(
   'sendMessage',
   async (text, { getState, dispatch }) => {
     const messages = selectMessages(getState());
-    const { temperature, defaultQuery } = getState();
+    const temperature = selectTemperature(getState());
+    const defaultQuery = selectDefaultQuery(getState());
 
     let query = {
       role: 'user',
@@ -63,12 +64,13 @@ export const sendMessage = createAsyncThunk(
 export const sendAudioMessage = createAsyncThunk(
   'sendAudioMessage',
   async (file, { getState, dispatch }) => {
-    const { temperature, defaultQuery } = getState();
+    const temperature = selectTemperature(getState());
+    const defaultQuery = selectDefaultQuery(getState());
+
     const query = { id: generateRandomId(), role: 'user', content: file };
-    dispatch(
-      addUserQuery(query)
-    );
-    
+
+    dispatch(addUserQuery(query));
+
     const form = new FormData();
     form.append('file', file);
     form.append('temperature', temperature);
@@ -153,6 +155,7 @@ export const selectMessages = messagesAdapter.getSelectors(
   state => state.messages
 ).selectAll;
 
+export const selectTemperature = state => state.messages.temperature;
+export const selectDefaultQuery = state => state.messages.defaultQuery;
 export const selectError = state => state.messages.error;
-
 export const selectIsLoading = state => state.messages.isLoading;

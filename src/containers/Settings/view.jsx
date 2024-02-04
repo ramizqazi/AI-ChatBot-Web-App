@@ -11,6 +11,12 @@ const SettingsView = ({
   onTempChange,
   onDefQueryChange,
 }) => {
+  const _handleTemperatureChange = (e) => {
+    if (e.target.value <= 1) {
+      onTempChange(e.target.value)
+    }
+  }
+
   return (
     <VStack justify="space-between" h="full" alignItems="flex-start">
       <Box w="full">
@@ -29,7 +35,7 @@ const SettingsView = ({
             type="number"
             value={temp}
             placeholder="0.1 - 1"
-            onChange={onTempChange}
+            onChange={_handleTemperatureChange}
           />
         </HStack>
         <HStack justify="space-between" mt={5}>
@@ -45,7 +51,7 @@ const SettingsView = ({
             flex={1}
             value={defQuery}
             placeholder="Give short Answer"
-            onChange={onDefQueryChange}
+            onChange={(e) => onDefQueryChange(e.target.value)}
           />
         </HStack>
       </Box>

@@ -46,7 +46,7 @@ const SideNav = ({ isLargerThan766 }) => {
         ml={'0.5rem'}
         display="flex"
         alignItems="center"
-        to='/chat'
+        to='/'
       >
         <Img src={LogoImg} w="45px" h="45px" />
         {isOpen && (
