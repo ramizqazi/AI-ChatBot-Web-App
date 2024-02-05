@@ -22,7 +22,7 @@ const SpeechToTextMobileButton = ({ sendAudioMessage }) => {
   };
 
   return (
-    <Box left="-35px" bottom="5px" pos="absolute">
+    <Box left="-34px" bottom="5px" pos="absolute">
       <AudioRecorder
         onRecordingComplete={addAudioElement}
         audioTrackConstraints={{

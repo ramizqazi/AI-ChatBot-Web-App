@@ -39,7 +39,7 @@ export const sendMessage = createAsyncThunk(
       content: m?.content,
     }));
 
-    dispatch(addUserQuery({ id: generateRandomId(), ...query }));
+    dispatch(addMessage({ id: generateRandomId(), ...query }));
 
     const response = await request({
       url: '/chat/completions',
@@ -67,9 +67,13 @@ export const sendAudioMessage = createAsyncThunk(
     const temperature = selectTemperature(getState());
     const defaultQuery = selectDefaultQuery(getState());
 
-    const query = { id: generateRandomId(), role: 'user', content: file };
+    const query = {
+      id: generateRandomId(),
+      role: 'user',
+      content: URL.createObjectURL(file),
+    };
 
-    dispatch(addUserQuery(query));
+    dispatch(addMessage(query));
 
     const form = new FormData();
     form.append('file', file);
@@ -93,7 +97,7 @@ export const sendAudioMessage = createAsyncThunk(
       ...response.choices[0]?.message,
     };
 
-    return answer
+    return answer;
   }
 );
 
@@ -108,7 +112,7 @@ const messagesSlice = createSlice({
     setDefaultQuery: (state, action) => {
       state.defaultQuery = action.payload;
     },
-    addUserQuery: (state, action) => {
+    addMessage: (state, action) => {
       messagesAdapter.addOne(state, action.payload);
     },
   },
@@ -144,7 +148,7 @@ const messagesSlice = createSlice({
 });
 
 // Actions
-export const { setDefaultQuery, setTemperature, addUserQuery } =
+export const { setDefaultQuery, setTemperature, addMessage } =
   messagesSlice.actions;
 
 // Reducer

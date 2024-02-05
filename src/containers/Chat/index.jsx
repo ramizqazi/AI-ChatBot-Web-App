@@ -1,18 +1,25 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { useToast } from '@chakra-ui/react';
 
 import ChatView from './view';
 import {
   selectMessages,
+  addMessage as addMessageAction,
   sendMessage as sendMessageAction,
 } from '../../redux/messagesSlice';
 
 /* =============================================================================
 <Chat />
 ============================================================================= */
-const Chat = ({ messages, sendMessage }) => {
+const Chat = ({ messages, addMessage, sendMessage }) => {
   const toast = useToast();
+
+  useEffect(() => {
+    if(messages?.length === 0){
+      addMessage({id: '01', role: 'assistant', content: 'Hello, how may i help you ?'})
+    }
+  }, [])
   
   const _handleMessageSend = async text => {
     try {
@@ -39,6 +46,7 @@ const mapStateToProps = state => ({
 
 const mapDisptachToProps = {
   sendMessage: sendMessageAction,
+  addMessage: addMessageAction,
 };
 
 /* Export

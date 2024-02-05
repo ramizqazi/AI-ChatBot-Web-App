@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
-import { Box, Img, Text, VStack } from '@chakra-ui/react';
+import { Box } from '@chakra-ui/react';
 import '@chatscope/chat-ui-kit-styles/dist/default/styles.min.css';
 import {
   Message,
@@ -11,9 +11,10 @@ import {
 } from '@chatscope/chat-ui-kit-react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
-import logoImg from '../../assets/images/logo.png';
+import Welcome from '../../components/Welcome';
 import SpeechToText from '../../components/SpeechToText';
 import MessageAudioBubble from '../../components/MessageAudioBubble';
+
 import { selectIsLoading } from '../../redux/messagesSlice';
 
 /* =============================================================================
@@ -30,46 +31,28 @@ const ChatView = ({ messages, loading, onSend }) => {
       navigate('/chat');
     }
     onSend(text);
-
     setText('');
   };
 
   return (
-    <Box flex={1} pos="relative">
-      {showWelcome && (
-        <VStack
-          pos="absolute"
-          left={0}
-          right={0}
-          mt="10%"
-          rowGap="10px"
-          textAlign="center"
-        >
-          <Img src={logoImg} w="150px" h="150px" />
-          <Text fontSize="3xl" fontWeight="semibold">
-            Welcome To Chatbot
-          </Text>
-          <Text fontSize="lg" fontWeight="medium">
-            Your AI assistant
-          </Text>
-        </VStack>
-      )}
+    <Box pos="relative" h="full">
+      {showWelcome && <Welcome />}
       <ChatContainer>
         {!showWelcome && (
           <MessageList
+            style={{ paddingBottom: 20 }}
             typingIndicator={
               loading && <TypingIndicator content={`Chatbot is typing`} />
             }
           >
             {messages?.length > 0 &&
               messages?.map(message => {
-                if (typeof message?.content === 'object') {
-                  return <MessageAudioBubble message={message?.content} />
+                if (message?.content?.includes('blob:https://')) {
+                  return <MessageAudioBubble message={message?.content} />;
                 }
                 return (
                   <Message
                     key={message?.id}
-                    style={message?.content.includes('Voice') ? { padding: '20px' } : null}
                     model={{
                       message: message?.content,
                       sender: message?.role,
@@ -77,7 +60,7 @@ const ChatView = ({ messages, loading, onSend }) => {
                         message?.role === 'user' ? 'outgoing' : 'incoming',
                     }}
                   />
-                )
+                );
               })}
           </MessageList>
         )}
